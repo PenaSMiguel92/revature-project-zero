@@ -13,3 +13,11 @@ class MenuInterface(ABC):
     @abstractmethod
     def display_menu(self):
         pass
+
+    @abstractmethod
+    def create_profile(self):
+        pass
+    
+    @abstractmethod
+    def run(self):
+        pass
