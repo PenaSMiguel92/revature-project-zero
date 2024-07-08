@@ -1,10 +1,10 @@
 from custom_exceptions.menuselectioninvalid import MenuSelectionInvalid
-from implementation import main_menu
+from implementation.main_menu import MainMenu, menu_state
 
 def main():
-    menu_object = main_menu.MainMenu()
+    menu_object = MainMenu()
 
-    while menu_object.get_state() != main_menu.CLOSING_STATE:
+    while menu_object.get_state() != menu_state.CLOSING_STATE:
         try:
             menu_object.run()
         except MenuSelectionInvalid as MSI:

@@ -19,5 +19,17 @@ class MenuInterface(ABC):
         pass
     
     @abstractmethod
+    def load_profile(self):
+        pass
+
+    @abstractmethod
+    def show_history(self):
+        pass
+
+    @abstractmethod
+    def report_biostats(self):
+        pass
+
+    @abstractmethod
     def run(self):
         pass

@@ -51,12 +51,26 @@ class MainMenu(InputValidation, MenuInterface):
             case _:
                 self.current_state = menu_state.INITIAL_STATE
     
+    def create_profile(self):
+        return super().create_profile()
+    
+    def load_profile(self):
+        return super().load_profile()
+    
+    def show_history(self):
+        return super().show_history()
+
+    def report_biostats(self):
+        return super().report_biostats()
+
     def run(self):
         match self.current_state:
             case menu_state.INITIAL_STATE:
                 self.display_menu()
             case menu_state.CREATE_PROFILE_STATE:
                 self.create_profile()
+            case menu_state.LOADING_PROFILE_STATE:
+                self.load_profile()
             case menu_state.SHOW_HISTORY_STATE:
                 self.show_history()
             case menu_state.REPORT_BIOSTATS_STATE:
