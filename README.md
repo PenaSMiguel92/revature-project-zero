@@ -14,7 +14,7 @@ The blood glucose concentration (BGC), can provide some insight into the user's 
 This application will provide a command line interface that will make it easy to track the user's BGC and BMI over time. 
 
 ## Project Requirements
-- CLI will ask user to choose from a number of options: (S)how history, (R)eport BGC and BMI, (C)lose the application.
+- CLI will ask user to choose from a number of options: (C)reate profile (L)oad profile (S)how history, (R)eport BGC and BMI, and (K)lose the application.
 - The application will read a CSV file. It will need to read the past time, BGC, and BMI and display a history chart using matplotlib.
 - The application will write to the same CSV file, and append to it the user's recently reported BGC and BMI. 
 - User input shall be validated by first checking to see if they selected an appropriate menu option, and then when prompting for BGC, weight, and height. The appropriate units are used, as well as the typing. 
