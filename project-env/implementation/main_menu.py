@@ -11,19 +11,19 @@ CLOSING_STATE = 6
 
 class MainMenu(InputValidation, MenuInterface):
     
-    def __init__(self) -> None:
+    def __init__(self):
         self.current_state = INITIAL_STATE
 
-    def validate_input(self, input_value: str) -> bool:
+    def validate_input(self, input_value):
         pass
     
-    def set_state(self, state_value: int) -> None:
+    def set_state(self, state_value):
         self.current_state = state_value
     
-    def get_state(self) -> int:
+    def get_state(self):
         return self.current_state
     
-    def display_menu(self) -> None:
+    def display_menu(self):
         print('Welcome to your BGC and BMI Tracker!')
         print('What would you like to do?')
         print('(C)reate profile') 

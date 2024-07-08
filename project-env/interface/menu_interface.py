@@ -3,13 +3,13 @@ from abc import ABC, abstractmethod
 class MenuInterface(ABC):
 
     @abstractmethod
-    def set_state(self, state_value: int) -> None:
+    def set_state(self, state_value):
         pass
 
     @abstractmethod
-    def get_state(self) -> int:
+    def get_state(self):
         pass
 
     @abstractmethod
-    def display_menu(self) -> None:
+    def display_menu(self):
         pass

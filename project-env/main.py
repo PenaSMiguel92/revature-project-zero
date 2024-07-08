@@ -1,7 +1,7 @@
 from custom_exceptions.menuselectioninvalid import MenuSelectionInvalid
 from implementation import main_menu
 
-def main() -> None:
+def main():
     menu_object = main_menu.MainMenu()
 
     while menu_object.get_state() != main_menu.CLOSING_STATE:
