@@ -19,7 +19,7 @@ This application will provide a command line interface that will make it easy to
 - The application will write to the same CSV file, and append to it the user's recently reported BGC and BMI. 
 - User input shall be validated by first checking to see if they selected an appropriate menu option, and then when prompting for BGC, weight, and height. The appropriate units are used, as well as the typing. 
 - This program will use classes to represent BGC and BMI, and their respective data validation methods. A file handling class will take in BGC and BMI objects, and write the data accordingly. Exception classes will be used to notify the user that something went wrong with their input, and they must try again. 
--  
+-  This project will be uploaded to the repository project0-cli under the username miguelpena-bigdata-dev
 
 ## Tech Stack
 - Python 3.x
