@@ -11,6 +11,5 @@ class MenuInterface(ABC):
         pass
 
     @abstractmethod
-    def display_menu() -> None:
+    def display_menu(self) -> None:
         pass
-    

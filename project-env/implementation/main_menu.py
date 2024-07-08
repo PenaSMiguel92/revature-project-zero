@@ -23,6 +23,13 @@ class MainMenu(InputValidation, MenuInterface):
     def get_state(self) -> int:
         return self.current_state
     
-    def display_menu() -> None:
-        pass
+    def display_menu(self) -> None:
+        print('Welcome to your BGC and BMI Tracker!')
+        print('What would you like to do?')
+        print('(C)reate profile') 
+        print('(L)oad profile') 
+        print('(S)how history') 
+        print('(R)eport BGC and BMI')
+        print('(K)lose the application')
+        return input()
 
