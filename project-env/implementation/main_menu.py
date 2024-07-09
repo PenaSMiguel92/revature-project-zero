@@ -12,7 +12,16 @@ menu_state = Enum('MENU_STATE', ['INITIAL_STATE',
 'CLOSING_STATE'])
 
 class MainMenu(InputValidation, MenuInterface):
-    
+    """
+        This class will handle the main command line interface (CLI). 
+        
+        It is a state machine dependent on user input. 
+        
+        The default state will be initial_state, and depending on user input the current_state will update accordingly. 
+
+        I can break this logic down further into more classes to follow SOLID principles, but that is beyond the scope of this project.
+    """
+
     def __init__(self):
         self.current_state = menu_state.INITIAL_STATE
     
@@ -29,7 +38,7 @@ class MainMenu(InputValidation, MenuInterface):
         print('(L)oad profile') 
         print('(S)how history') 
         print('(R)eport BGC and BMI')
-        print('(K)lose the application')
+        print('(K)lose the application') #Mortal Kombat spelling, since C was already taken.
         user_input = input()
         if not self.validate_input(user_input):
             raise MenuSelectionInvalid("Please enter a valid menu option.")
@@ -72,6 +81,6 @@ class MainMenu(InputValidation, MenuInterface):
                 self.show_history()
             case menu_state.REPORT_BIOSTATS_STATE:
                 self.report_biostats()
-            case _:
-                print('Closing tracker...')
+            case _: #The only other state it can be is menu_state.CLOSING_STATE
+                print("Closing tracker. Have a nice day :)") 
             
