@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 
 class InputValidation(ABC):
 
-    @abstractmethod
-    def validate_input(self, input_value):
+    @staticmethod
+    def validate_input(input_value):
+        #provide input validation logic -> ensure that input is int, char, etc. 
         pass

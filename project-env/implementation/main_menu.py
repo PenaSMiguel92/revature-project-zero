@@ -15,9 +15,6 @@ class MainMenu(InputValidation, MenuInterface):
     
     def __init__(self):
         self.current_state = menu_state.INITIAL_STATE
-
-    def validate_input(self, input_value):
-        pass
     
     def set_state(self, state_value):
         self.current_state = state_value
