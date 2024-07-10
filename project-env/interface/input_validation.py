@@ -16,7 +16,7 @@ class InputValidation(ABC):
         if kwargs.get('char_input') != None:
             return input_value in kwargs['valid_input']
         elif kwargs.get('integer_input') != None:
-            return int.is_integer(input_value)
+            return input_value.isdigit()
         elif kwargs.get('string_input') != None:
             return len(input_value) > 2
         else:
