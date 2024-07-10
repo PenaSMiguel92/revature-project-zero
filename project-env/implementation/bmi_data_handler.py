@@ -1,7 +1,7 @@
-from interface.data_handler_interface import DataHandlerInterface
+# from interface.data_handler_interface import DataHandlerInterface
 from interface.input_validation import InputValidation
 
-class BMI_DataHandler(InputValidation, DataHandlerInterface):
+class BMI_DataHandler(InputValidation): #, DataHandlerInterface):
     """
         BMI -> Body Mass Index
         BMI = 703 x Weight (lbs) / Height * Height (inches)

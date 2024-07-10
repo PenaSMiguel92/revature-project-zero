@@ -1,7 +1,7 @@
-from interface.data_handler_interface import DataHandlerInterface
+# from interface.data_handler_interface import DataHandlerInterface
 from interface.input_validation import InputValidation
 
-class BGC_DataHandler(InputValidation, DataHandlerInterface):
+class BGC_DataHandler(InputValidation): #, DataHandlerInterface):
     """
         BGC -> Blood Glucose Concentration
         Random -> Normal: < 200 mg/dl, Prediabetes: N/A, Diabetes: >= 200 mg/dl
