@@ -25,6 +25,7 @@ class MainMenu(InputValidation, MenuInterface):
 
     def __init__(self):
         self.current_state = menu_state.INITIAL_STATE
+        self.current_profile = None
     
     def set_state(self, state_value: int) -> None:
         self.current_state = state_value
@@ -33,6 +34,9 @@ class MainMenu(InputValidation, MenuInterface):
         return self.current_state
     
     def reset_state(self) -> None:
+        """
+            There's only so much DRY can do, I still need to call this method at the end of every menu option method.
+        """
         self.current_state = menu_state.INITIAL_STATE
     
     def display_menu(self) -> None:
@@ -62,14 +66,16 @@ class MainMenu(InputValidation, MenuInterface):
                 self.current_state = menu_state.INITIAL_STATE
     
     def create_profile(self):
-        print("Creating profile...")
-        ProfileHandler.create_profile()
         self.reset_state()
-
-    
+        profile_handler: ProfileHandler = ProfileHandler()
+        if profile_handler.create_profile():
+            self.current_profile = profile_handler
+            
     def load_profile(self):
-        print('Loading profile...')
         self.reset_state()
+        profile_handler: ProfileHandler = ProfileHandler()
+        if profile_handler.load_profile():
+            self.current_profile = profile_handler
     
     def show_history(self):
         print('Showing history...')
