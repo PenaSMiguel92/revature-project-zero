@@ -1,4 +1,5 @@
 import os.path as Path
+import csv
 from interface.input_validation import InputValidation
 from interface.profile_interface import ProfileInterface
 from custom_exceptions.invalid_profile import InvalidProfileException
@@ -29,7 +30,8 @@ class ProfileHandler(InputValidation, ProfileInterface):
         age_input = input("Please enter your age: ")
         if not self.validate_input(age_input, integer_input = True):
             raise InvalidProfileException('Please enter a number.')
-        if int(age_input) < 20:
+        age_input_int = int(age_input)
+        if age_input_int < 20:
             raise InvalidProfileException('You are too young.')
         
         height_input = input("Please enter your height in inches: ")
@@ -39,8 +41,15 @@ class ProfileHandler(InputValidation, ProfileInterface):
         if not (20 < height_input_int < 100):
             raise InvalidProfileException("Please enter a valid height.")
         
-        with open(file_name, 'w+'): 
-            pass
+        self.height = height_input_int
+        self.age = age_input_int
+
+        with open(file_name, 'w+') as profile_data: 
+            csv_writer = csv.writer(profile_data)
+            rows_to_write = []
+            rows_to_write.append(['Height', 'Age'])
+            rows_to_write.append([self.height, self.age])
+            csv_writer.writerows(rows_to_write)
 
         return True
         
