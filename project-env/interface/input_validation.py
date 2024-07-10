@@ -4,11 +4,22 @@ from abc import ABC, abstractmethod
 class InputValidation(ABC):
 
     @staticmethod
-    def validate_input(input_value, lambda_expr):
+    def validate_input(input_value: str, **kwargs: any) -> bool:
         """
-            Implementing class must provide a lambda function that does the appropriate check. 
-            This method will wrap it to a try-except statement and return a boolean based on whether the check failed (exception like ValueError was raised)
-            Meant to provide input validation logic -> ensure that input is int, char, etc.
-            Inheriting this static method is probably not a good practice, but I like to try out new things. 
+            This is a static method that can be inherited by any class that needs to validate input.
+
+            :params: Caller must provide the input value along with keyword arguments: char_input, integer_input, or string_input set to True,
+            and if char_input, then provide a string containing valid characters as valid_input.
+            :return: Returns a boolean value, true if valid input, false if not valid.
         """
-        pass
+        # try:
+        if kwargs.get('char_input') != None:
+            return input_value in kwargs['valid_input']
+        elif kwargs.get('integer_input') != None:
+            return int.is_integer(input_value)
+        elif kwargs.get('string_input') != None:
+            return len(input_value) > 2
+        else:
+            return False
+        # except KeyError as KE:
+        #     print('')

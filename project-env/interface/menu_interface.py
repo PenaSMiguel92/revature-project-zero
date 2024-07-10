@@ -3,15 +3,30 @@ from abc import ABC, abstractmethod
 class MenuInterface(ABC):
 
     @abstractmethod
-    def set_state(self, state_value):
+    def set_state(self, state_value: int) -> None:
+        """
+            Encapsulation method for setting the current state of the menu object.
+
+            :params: The enum menu_state holds the various valid program states.  
+        """
         pass
 
     @abstractmethod
-    def get_state(self):
+    def get_state(self) -> int:
+        """
+            Encapsulation method for getting the current state of the menu object.
+
+            :params:
+            :return: This will be an int associated with the enum menu_state
+        """
         pass
 
     @abstractmethod
-    def display_menu(self):
+    def display_menu(self) -> None:
+        """
+            Method for displaying menu options and listening for user input.
+
+        """
         pass
 
     @abstractmethod

@@ -25,13 +25,13 @@ class MainMenu(InputValidation, MenuInterface):
     def __init__(self):
         self.current_state = menu_state.INITIAL_STATE
     
-    def set_state(self, state_value):
+    def set_state(self, state_value: int) -> None:
         self.current_state = state_value
     
-    def get_state(self):
+    def get_state(self) -> int:
         return self.current_state
     
-    def display_menu(self):
+    def display_menu(self) -> None:
         print('Welcome to your BGC and BMI Tracker!')
         print('What would you like to do?')
         print('(C)reate profile') 
@@ -39,8 +39,8 @@ class MainMenu(InputValidation, MenuInterface):
         print('(S)how history') 
         print('(R)eport BGC and BMI')
         print('(K)lose the application') #Mortal Kombat spelling, since C was already taken.
-        user_input = input()
-        if not self.validate_input(user_input):
+        user_input = input().upper()
+        if not self.validate_input(user_input, char_input = True, valid_input = 'CLSRK'):
             raise MenuSelectionInvalid("Please enter a valid menu option.")
         
         match user_input:
