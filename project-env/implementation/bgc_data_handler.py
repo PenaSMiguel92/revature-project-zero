@@ -20,7 +20,7 @@ class BGC_DataHandler(InputValidation, DataHandlerInterface):
     def __init__(self):
         pass
     
-    def read_data(self):
+    def read_data(self, csv_value: str) -> None:
         return super().read_data()
     
     def write_data(self):

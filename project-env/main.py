@@ -19,8 +19,8 @@ def main() -> None:
             print(IBMIE.message)
         except InvalidBGCException as IBGCE:
             print(IBGCE.message)
-        finally:
-            menu_object.set_state(menu_state.INITIAL_STATE)
+        # finally:
+        #     menu_object.set_state(menu_state.INITIAL_STATE)
 
 if __name__ == "__main__":
     main()

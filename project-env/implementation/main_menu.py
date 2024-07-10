@@ -1,6 +1,7 @@
 from interface.input_validation import InputValidation
 from interface.menu_interface import MenuInterface
 from custom_exceptions.menuselectioninvalid import MenuSelectionInvalid
+from implementation.profile_handler import ProfileHandler
 from enum import Enum
 
 menu_state = Enum('MENU_STATE', ['INITIAL_STATE',
@@ -31,6 +32,9 @@ class MainMenu(InputValidation, MenuInterface):
     def get_state(self) -> int:
         return self.current_state
     
+    def reset_state(self) -> None:
+        self.current_state = menu_state.INITIAL_STATE
+    
     def display_menu(self) -> None:
         print('Welcome to your BGC and BMI Tracker!')
         print('What would you like to do?')
@@ -58,22 +62,28 @@ class MainMenu(InputValidation, MenuInterface):
                 self.current_state = menu_state.INITIAL_STATE
     
     def create_profile(self):
-        return super().create_profile()
+        print("Creating profile...")
+        ProfileHandler.create_profile()
+        self.reset_state()
+
     
     def load_profile(self):
-        return super().load_profile()
+        print('Loading profile...')
+        self.reset_state()
     
     def show_history(self):
-        return super().show_history()
+        print('Showing history...')
+        self.reset_state()
 
     def report_biostats(self):
-        return super().report_biostats()
+        print('Reporting biostats...')
+        self.reset_state()
 
     def run(self):
         match self.current_state:
             case menu_state.INITIAL_STATE:
                 self.display_menu()
-            case menu_state.CREATE_PROFILE_STATE:
+            case menu_state.CREATING_PROFILE_STATE:
                 self.create_profile()
             case menu_state.LOADING_PROFILE_STATE:
                 self.load_profile()
