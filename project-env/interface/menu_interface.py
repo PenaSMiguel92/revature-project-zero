@@ -31,6 +31,11 @@ class MenuInterface(ABC):
 
     @abstractmethod
     def create_profile(self):
+        """
+            Method for creating a 'profile' which is just a file containing BGC and BMI data.
+            
+            Raises a invalid profile exception whenever the user inputs a name that is too short (< 3 chars), or if the file already exists.
+        """
         pass
     
     @abstractmethod

@@ -6,7 +6,8 @@ class InputValidation(ABC):
     @staticmethod
     def validate_input(input_value: str, **kwargs: any) -> bool:
         """
-            This is a static method that can be inherited by any class that needs to validate input.
+            This is a static method that can be inherited by any class that needs to validate input. It could've just been 
+            a static class, but too late to change now.
 
             :params: Caller must provide the input value along with keyword arguments: char_input, integer_input, or string_input set to True,
             and if char_input, then provide a string containing valid characters as valid_input.

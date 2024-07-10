@@ -31,3 +31,4 @@ class TimeDataHandler(DataHandlerInterface, TimeStampHandlerInterface):
 
 
 
+###Changed to txt file last minute to reduce scope of project to focus on just BGC and BMI.

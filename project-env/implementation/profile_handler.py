@@ -1,4 +1,4 @@
-import os
+import os.path as Path
 from interface.input_validation import InputValidation
 from interface.profile_interface import ProfileInterface
 from custom_exceptions.invalid_profile import InvalidProfileException
@@ -20,7 +20,7 @@ class ProfileHandler(ProfileInterface):
         if not InputValidation.validate_input(user_input, string_input = True):
             raise InvalidProfileException('Please enter a longer name.')
         file_name = f"data\{user_input}_data.csv"
-        if not os.path.isfile(file_name):
+        if not Path.isfile(file_name):
             with open(file_name, 'w+'): pass
         
     
