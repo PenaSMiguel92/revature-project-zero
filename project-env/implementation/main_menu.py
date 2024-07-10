@@ -40,7 +40,7 @@ class MainMenu(InputValidation, MenuInterface):
         self.current_state = menu_state.INITIAL_STATE
     
     def display_menu(self) -> None:
-        print('Welcome to your BGC and BMI Tracker!')
+        print('\nWelcome to your BGC and BMI Tracker!')
         print('What would you like to do?')
         print('(C)reate profile') 
         print('(L)oad profile') 

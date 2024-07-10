@@ -1,4 +1,5 @@
 from custom_exceptions.menuselectioninvalid import MenuSelectionInvalid
+from custom_exceptions.invalid_profile import InvalidProfileException
 from custom_exceptions.invalid_bgc import InvalidBGCException
 from custom_exceptions.invalid_bmi import InvalidBMIException
 from implementation.main_menu import MainMenu, menu_state
@@ -19,6 +20,8 @@ def main() -> None:
             print(IBMIE.message)
         except InvalidBGCException as IBGCE:
             print(IBGCE.message)
+        except InvalidProfileException as IPE:
+            print(IPE.message)
         # finally:
         #     menu_object.set_state(menu_state.INITIAL_STATE)
 

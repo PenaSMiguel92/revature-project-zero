@@ -19,7 +19,7 @@ class InputValidation(ABC):
         elif kwargs.get('integer_input') != None:
             return input_value.isdigit()
         elif kwargs.get('string_input') != None:
-            return len(input_value) > 2
+            return input_value.isalpha() and len(input_value) > 2
         else:
             return False
         # except KeyError as KE:
