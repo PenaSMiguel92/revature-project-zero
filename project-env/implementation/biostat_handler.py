@@ -19,7 +19,7 @@ class BiostatHandler(BiostatHandlerInterface):
             raise DataMissingException("The filename was not valid.")
         
         if not Path.isfile(filename):
-            raise DataMissingException("The file does not exist, so the data is missing.")
+            raise DataMissingException("This profile does not exist and data is missing as a result.")
         
         self.data.clear()
         with open(filename, 'r') as profile_data:
@@ -36,7 +36,7 @@ class BiostatHandler(BiostatHandlerInterface):
                 self.data.append((bgc_object, bmi_object))
 
         if len(self.data) < 1:
-            raise DataMissingException("The file does not contain any data, please report them.")
+            raise DataMissingException("This profile does not contain any data, please report them.")
     
     def create_data(self) -> None:
         self.data.clear()
