@@ -24,8 +24,14 @@ class ProfileInterface(ABC):
         """
         pass
 
-    def get_filename() -> str:
+    def get_filename(self) -> str:
         """
             This method should return a properly formatted file name.
+        """
+        pass
+
+    def get_const_biostats(self) -> tuple[int]:
+        """
+            This method should return height and age in a tuple, which are constant across BMI measurements, hence constant biostats.
         """
         pass

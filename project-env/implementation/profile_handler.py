@@ -86,3 +86,6 @@ class ProfileHandler(InputValidation, ProfileInterface):
             return ''
         
         return f"data\\{self.name}_data.csv"
+    
+    def get_const_biostats(self) -> tuple[int]:
+        return (self.height, self.age)

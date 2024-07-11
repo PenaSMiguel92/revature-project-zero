@@ -81,8 +81,9 @@ class MainMenu(InputValidation, MenuInterface):
             self.current_profile = profile_handler
         
         filename = profile_handler.get_filename()
+        const_biostats: tuple[int] = profile_handler.get_const_biostats()
         biostat_handler: BiostatHandler = BiostatHandler()
-        if biostat_handler.load_data(filename):
+        if biostat_handler.load_data(filename, const_biostats):
             self.current_biostatHandler = biostat_handler
 
             

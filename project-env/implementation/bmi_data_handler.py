@@ -26,14 +26,11 @@ class BMI_DataHandler(InputValidation): #, DataHandlerInterface):
         When str is called, this class will return a csv compatible string for saving.
 
     """
-    def __init__(self, *args):
-        if len(args) > 2:
-            self.age = args[0]
-            self.height = args[1]
-            self.weight = args[2]
-            self.value = (self.weight / (self.height * self.height)) * 703
-        else:
-            self.value = args[0]
+    def __init__(self, age, height, weight):
+        self.age = age
+        self.height = height
+        self.weight = weight
+        self.value = (self.weight / (self.height * self.height)) * 703
     
     def read_data(self, csv_value: str) -> None:
         return super().read_data()
