@@ -19,6 +19,10 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
     def __init__(self):
         self.data = []
 
+    # def set_const_biostats(self, const_biostats: tuple[int]) -> None:
+    #     self.height = const_biostats[0]
+    #     self.age = const_biostats[1]
+
     def load_data(self, filename: str, const_biostats: tuple[int]) -> None:
         if filename == '':
             raise DataMissingException("The filename was not valid.")
@@ -43,7 +47,7 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
                 self.data.append((bgc_object, bmi_object))
 
         if len(self.data) < 1:
-            raise DataMissingException("This profile does not contain any data, please report them.")
+            print("This profile does not contain any data, please report them.")
     
     def ask_for_data(self) -> tuple[BGC_DataHandler | BMI_DataHandler]:
         """

@@ -52,6 +52,12 @@ class MenuInterface(ABC):
         pass
 
     @abstractmethod
+    def load_data(self):
+        """
+            This method should only succeed if there's a profile currently loaded, and data exists in the file.
+        """
+        pass
+    @abstractmethod
     def show_history(self):
         """
             This method will use an existing profile handler object and load all rows of data saved so far. It will then plot the data with matplotlib.

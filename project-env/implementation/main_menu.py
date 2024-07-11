@@ -1,6 +1,7 @@
 from interface.input_validation import InputValidation
 from interface.menu_interface import MenuInterface
 from custom_exceptions.menu_selection_invalid import MenuSelectionInvalidException
+from custom_exceptions.invalid_profile import InvalidProfileException
 from custom_exceptions.data_missing import DataMissingException
 from implementation.profile_handler import ProfileHandler
 from implementation.biostat_handler import BiostatHandler
@@ -39,7 +40,7 @@ class MainMenu(InputValidation, MenuInterface):
     def reset_state(self) -> None:
         """
             This is an encapsulated method that should only be accessible by this class.
-            
+
             There's only so much DRY can do, I still need to call this method at the end of every menu option method.
         """
         self.current_state = menu_state.INITIAL_STATE
@@ -81,15 +82,18 @@ class MainMenu(InputValidation, MenuInterface):
         profile_handler: ProfileHandler = ProfileHandler()
         if profile_handler.load_profile():
             self.current_profile = profile_handler
+
+    def load_data(self):    
+        if self.current_profile == None:
+            raise InvalidProfileException("You haven't created or loaded a profile yet.")
         
-        filename = profile_handler.get_filename()
-        const_biostats: tuple[int] = profile_handler.get_const_biostats()
+        filename = self.current_profile.get_filename()
+        const_biostats: tuple[int] = self.current_profile.get_const_biostats()
+
         biostat_handler: BiostatHandler = BiostatHandler()
         if biostat_handler.load_data(filename, const_biostats):
             self.current_biostatHandler = biostat_handler
 
-            
-    
     def show_history(self):
         self.reset_state()
         if self.current_biostatHandler == None:
@@ -117,8 +121,14 @@ class MainMenu(InputValidation, MenuInterface):
             case menu_state.LOADING_PROFILE_STATE:
                 self.load_profile()
             case menu_state.SHOW_HISTORY_STATE:
+                if self.current_biostatHandler == None: 
+                    self.load_data()
+                    
                 self.show_history()
             case menu_state.REPORT_BIOSTATS_STATE:
+                if self.current_biostatHandler == None:
+                    self.load_data()
+                
                 self.report_biostats()
                 if self.current_biostatHandler != None and self.current_profile != None:
                     filename = self.current_profile.get_filename()
