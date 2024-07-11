@@ -2,8 +2,6 @@ class InvalidProfileException(Exception):
     """
         Thrown when user inputs an invalid name when creating profile (<= 2 chars), non-existing profile when loading (file does not exist),
         or when profile already exists when creating profile.
-
-        Simply check if {name}_data.csv exists, before creating profile.
  
     """
     def __init__(self, message):

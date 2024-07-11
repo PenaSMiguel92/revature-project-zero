@@ -3,6 +3,7 @@ import csv
 from interface.input_validation import InputValidation
 from interface.profile_interface import ProfileInterface
 from custom_exceptions.invalid_profile import InvalidProfileException
+from custom_exceptions.invalid_bmi import InvalidBMIException
 
 class ProfileHandler(InputValidation, ProfileInterface):
     def __init__(self):
@@ -31,17 +32,17 @@ class ProfileHandler(InputValidation, ProfileInterface):
         
         age_input = input("Please enter your age: ")
         if not self.validate_input(age_input, integer_input = True):
-            raise InvalidProfileException('Please enter a number.')
+            raise InvalidBMIException('Please enter a number in years.')
         age_input_int = int(age_input)
         if age_input_int < 20:
-            raise InvalidProfileException('You are too young.')
+            raise InvalidBMIException('You are too young for BMI classification.')
         
         height_input = input("Please enter your height in inches: ")
         if not self.validate_input(height_input, integer_input = True):
-            raise InvalidProfileException("Please enter a number.")
+            raise InvalidBMIException("Please enter an integer height in inches.")
         height_input_int = int(height_input)
         if not (20 < height_input_int < 100):
-            raise InvalidProfileException("Please enter a valid height.")
+            raise InvalidBMIException("Please enter a valid height for BMI classification.")
         
         self.height = height_input_int
         self.age = age_input_int
