@@ -1,7 +1,6 @@
 import os.path as Path
 import csv
-import numpy as np
-import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt
 
 from custom_exceptions.data_missing import DataMissingException
 from custom_exceptions.invalid_bgc import InvalidBGCException
@@ -68,6 +67,9 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
         bgc_object = BGC_DataHandler(bgc_input_int)
         bmi_object = BMI_DataHandler(self.age, self.height, weight_input_int)
         
+        print(f"Your Blood Glucose Concentration is " + str(bgc_object) + " mg/dL which is considered " + bgc_object.get_classification())
+        print(f"You Body Mass Index is " + str(bmi_object) + " which is makes you " + bmi_object.get_classification())
+        print(f"Thank you! Your data has been saved.")
         return (bgc_object, bmi_object)
     
     
@@ -82,5 +84,22 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
         if data != None:
             self.data.append(data)
 
+    def save_data(self, filename: str) -> None:
+        if not Path.isfile(filename):
+            raise DataMissingException("The provided filename does not exist.")
+        
+        with open(filename, 'w', newline='') as profile_data:
+            # csv_writer = csv.writer(profile_data)
+            # for idx, row in enumerate(csv_writer):
+
+            pass
+
     def show_data(self) -> None:
-        pass
+        x_axis = [len(self.data) - (x_value + 1) for x_value in range(len(self.data))]
+        y_axis = [value[0] for value in self.data]
+        
+        plt.title("Blood Glucose Concentration")
+        plt.xlabel("Days Ago")
+        plt.ylabel("BGC (mg/dL)")
+        plt.plot(x_axis, y_axis)
+        plt.show()

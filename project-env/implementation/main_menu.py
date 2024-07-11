@@ -38,6 +38,8 @@ class MainMenu(InputValidation, MenuInterface):
     
     def reset_state(self) -> None:
         """
+            This is an encapsulated method that should only be accessible by this class.
+            
             There's only so much DRY can do, I still need to call this method at the end of every menu option method.
         """
         self.current_state = menu_state.INITIAL_STATE
@@ -118,6 +120,9 @@ class MainMenu(InputValidation, MenuInterface):
                 self.show_history()
             case menu_state.REPORT_BIOSTATS_STATE:
                 self.report_biostats()
+                if self.current_biostatHandler != None and self.current_profile != None:
+                    filename = self.current_profile.get_filename()
+                    self.current_biostatHandler.save_data(filename)
             case _: #The only other state it can be is menu_state.CLOSING_STATE
                 print("Closing tracker. Have a nice day :)") 
             
