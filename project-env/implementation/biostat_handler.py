@@ -23,7 +23,7 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
     #     self.height = const_biostats[0]
     #     self.age = const_biostats[1]
 
-    def load_data(self, filename: str, const_biostats: tuple[int]) -> None:
+    def load_data(self, filename: str, const_biostats: tuple[int]) -> bool:
         if filename == '':
             raise DataMissingException("The filename was not valid.")
         
@@ -48,6 +48,8 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
 
         if len(self.data) < 1:
             print("This profile does not contain any data, please report them.")
+        
+        return True
     
     def ask_for_data(self) -> tuple[BGC_DataHandler | BMI_DataHandler]:
         """
@@ -77,16 +79,20 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
         return (bgc_object, bmi_object)
     
     
-    def create_data(self) -> None:
+    def create_data(self) -> bool:
         self.data = []
         data = self.ask_for_data()
         if data != None:
-            self.data.append(data) 
+            self.data.append(data)
+        
+        return True 
 
-    def append_data(self) -> None:
+    def append_data(self) -> bool:
         data = self.ask_for_data()
         if data != None:
             self.data.append(data)
+        
+        return True
 
     def save_data(self, filename: str) -> None:
         if not Path.isfile(filename):
@@ -100,7 +106,7 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
 
     def show_data(self) -> None:
         x_axis = [len(self.data) - (x_value + 1) for x_value in range(len(self.data))]
-        y_axis = [value[0] for value in self.data]
+        y_axis = [int(str(value[0])) for value in self.data]
         
         plt.title("Blood Glucose Concentration")
         plt.xlabel("Days Ago")

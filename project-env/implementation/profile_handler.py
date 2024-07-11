@@ -67,16 +67,22 @@ class ProfileHandler(InputValidation, ProfileInterface):
         if not Path.isfile(file_name):
             raise InvalidProfileException('File does not exist, please create profile.')
         
-        self.name = user_input
+       
         with open(file_name, 'r') as profile_data:
             csv_reader = csv.reader(profile_data)
+            read_second_line = None
             for idx, row in enumerate(csv_reader):
                 if idx != 1:
                     continue
                 read_second_line = row
+
+            if read_second_line == None:
+                raise InvalidProfileException('File is empty, please create a profile.')
+            
             self.height = int(read_second_line[0])
             self.age = int(read_second_line[1])
-            
+        
+        self.name = user_input
         print("Your profile was successfully loaded!")
         print("Please choose another option.")
         return True

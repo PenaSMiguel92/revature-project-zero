@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 class BiostatHandlerInterface(ABC):
     
     @abstractmethod
-    def load_data(self, filename: str) -> bool: 
+    def load_data(self, filename: str, const_biostats: tuple[int]) -> bool: 
         """
             This method will be called by main_menu when loading a profile, so that data loading is handled by a different class (Single Responsibility principle)
             
@@ -16,22 +16,26 @@ class BiostatHandlerInterface(ABC):
         pass
 
     @abstractmethod
-    def create_data(self) -> None:
+    def create_data(self) -> bool:
         """
             This method will ask the user to input BGC and Weight (pounds) for BMI, create the respective objects, and append them to a new data list.
 
             This method should only be called when first creating a data list.
+
+            This method returns a True boolean value when successful.
 
             This method will raise either invalid_bgc or invalid_bmi exceptions if the user does not input valid values for each.
         """
         pass
 
     @abstractmethod
-    def append_data(self) -> None:
+    def append_data(self) -> bool:
         """
             This method will also ask the user to input valid BGC and Weight (pounds) for BMI, create the respective objects, and append them to an existing data list.
 
             This method should only be called when a data list already exists.
+
+            This method returns a True boolean value when successful. 
 
             This method will raise the same exceptions as create_data for the same reasons.
         """
