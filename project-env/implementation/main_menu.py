@@ -2,6 +2,7 @@ from interface.input_validation import InputValidation
 from interface.menu_interface import MenuInterface
 from custom_exceptions.menuselectioninvalid import MenuSelectionInvalid
 from implementation.profile_handler import ProfileHandler
+from implementation.biostat_handler import BiostatHandler
 from enum import Enum
 
 menu_state = Enum('MENU_STATE', ['INITIAL_STATE',
@@ -26,6 +27,7 @@ class MainMenu(InputValidation, MenuInterface):
     def __init__(self):
         self.current_state = menu_state.INITIAL_STATE
         self.current_profile = None
+        self.current_biostatHandler = None
     
     def set_state(self, state_value: int) -> None:
         self.current_state = state_value
@@ -82,8 +84,11 @@ class MainMenu(InputValidation, MenuInterface):
         self.reset_state()
 
     def report_biostats(self):
-        print('Reporting biostats...')
         self.reset_state()
+        biostat_handler: BiostatHandler = BiostatHandler()
+        if biostat_handler.create_data():
+            self.current_biostatHandler = biostat_handler
+        
 
     def run(self):
         match self.current_state:

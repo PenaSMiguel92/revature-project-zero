@@ -1,4 +1,4 @@
-class MenuSelectionInvalid(Exception):
+class MenuSelectionInvalidException(Exception):
     """
         Thrown when user input is not within a set of options 'CLRSK'. 
     """
