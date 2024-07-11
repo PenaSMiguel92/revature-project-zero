@@ -1,6 +1,6 @@
 from interface.input_validation import InputValidation
 from interface.menu_interface import MenuInterface
-from custom_exceptions.menuselectioninvalid import MenuSelectionInvalid
+from custom_exceptions.menu_selection_invalid import MenuSelectionInvalidException
 from implementation.profile_handler import ProfileHandler
 from implementation.biostat_handler import BiostatHandler
 from enum import Enum
@@ -51,7 +51,7 @@ class MainMenu(InputValidation, MenuInterface):
         print('(K)lose the application') #Mortal Kombat spelling, since C was already taken.
         user_input = input().upper()
         if not self.validate_input(user_input, char_input = True, valid_input = 'CLSRK'):
-            raise MenuSelectionInvalid("Please enter a valid menu option.")
+            raise MenuSelectionInvalidException("Please enter a valid menu option.")
         
         match user_input:
             case 'C':
@@ -85,9 +85,12 @@ class MainMenu(InputValidation, MenuInterface):
 
     def report_biostats(self):
         self.reset_state()
-        biostat_handler: BiostatHandler = BiostatHandler()
-        if biostat_handler.create_data():
-            self.current_biostatHandler = biostat_handler
+        if self.current_biostatHandler != None:
+            self.current_biostatHandler.create_data()
+        else:
+            biostat_handler: BiostatHandler = BiostatHandler()
+            if biostat_handler.create_data():
+                self.current_biostatHandler = biostat_handler
         
 
     def run(self):

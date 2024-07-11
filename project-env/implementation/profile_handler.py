@@ -10,8 +10,6 @@ class ProfileHandler(InputValidation, ProfileInterface):
         self.name = ''
         self.height = 0
         self.age = 0
-        self.bgc_history = []
-        self.bmi_history = []
     # def __init__(self, name: str, height: int, age: int) -> None:
     #     #For now, any other attributes will be beyond the scope of this project.
     #     self.name = name
@@ -44,6 +42,7 @@ class ProfileHandler(InputValidation, ProfileInterface):
         if not (20 < height_input_int < 100):
             raise InvalidBMIException("Please enter a valid height for BMI classification.")
         
+        self.name = name_input
         self.height = height_input_int
         self.age = age_input_int
 
@@ -68,6 +67,7 @@ class ProfileHandler(InputValidation, ProfileInterface):
         if not Path.isfile(file_name):
             raise InvalidProfileException('File does not exist, please create profile.')
         
+        self.name = user_input
         with open(file_name, 'r') as profile_data:
             csv_reader = csv.reader(profile_data)
             for idx, row in enumerate(csv_reader):
@@ -81,3 +81,9 @@ class ProfileHandler(InputValidation, ProfileInterface):
         print("Your profile was successfully loaded!")
         print("Please choose another option.")
         return True
+    
+    def get_filename(self) -> str:
+        if self.name == '':
+            return ''
+        
+        return f"data\\{self.name}_data.csv"

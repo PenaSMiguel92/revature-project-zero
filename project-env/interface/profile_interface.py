@@ -23,3 +23,9 @@ class ProfileInterface(ABC):
             This method will raise InvalidProfileException if the profile specified does not exist.
         """
         pass
+
+    def get_filename() -> str:
+        """
+            This method should return a properly formatted file name.
+        """
+        pass
