@@ -1,17 +1,17 @@
 from abc import ABC, abstractmethod
-from implementation.bgc_data_handler import BGC_DataHandler
-from implementation.bmi_data_handler import BMI_DataHandler
 
 class BiostatHandlerInterface(ABC):
     
     @abstractmethod
-    def load_data(self) -> list[tuple[BGC_DataHandler, BMI_DataHandler]]: 
+    def load_data(self, filename: str) -> bool: 
         """
             This method will be called by main_menu when loading a profile, so that data loading is handled by a different class (Single Responsibility principle)
             
             This method will primarily load BGC and BMI from the csv file to a list[(BGC, BMI)] where the list will hold tuples of BGC and BMI objects that each handle display.
 
             This method will raise the DataMissing exception if the rest of the csv file is missing, and the user will first need to create some data.
+
+            This method will return true if data was loaded successfully.
         """
         pass
 

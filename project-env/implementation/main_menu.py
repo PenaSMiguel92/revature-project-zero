@@ -78,6 +78,13 @@ class MainMenu(InputValidation, MenuInterface):
         profile_handler: ProfileHandler = ProfileHandler()
         if profile_handler.load_profile():
             self.current_profile = profile_handler
+        
+        filename = profile_handler.get_filename()
+        biostat_handler: BiostatHandler = BiostatHandler()
+        if biostat_handler.load_data(filename):
+            self.current_biostatHandler = biostat_handler
+
+            
     
     def show_history(self):
         print('Showing history...')

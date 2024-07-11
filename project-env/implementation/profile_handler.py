@@ -77,7 +77,6 @@ class ProfileHandler(InputValidation, ProfileInterface):
             self.height = int(read_second_line[0])
             self.age = int(read_second_line[1])
             
-        
         print("Your profile was successfully loaded!")
         print("Please choose another option.")
         return True
