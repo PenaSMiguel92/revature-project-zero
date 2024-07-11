@@ -1,7 +1,6 @@
-# from interface.data_handler_interface import DataHandlerInterface
-from interface.input_validation import InputValidation
+from interface.data_handler_interface import DataHandlerInterface
 
-class BMI_DataHandler(InputValidation): #, DataHandlerInterface):
+class BMI_DataHandler(DataHandlerInterface):
     # BMI -> Body Mass Index
     # BMI = 703 x (Weight (lbs) / Height * Height (inches * inches))
     # 
@@ -17,23 +16,33 @@ class BMI_DataHandler(InputValidation): #, DataHandlerInterface):
     # Obese Class III: > 40
     
     """
+        This class is a wrapper class that holds a BMI value. 
+
         This class will require that Height: int (inches), Weight: int (pounds), and Age: Int (years) are passed to its constructor.
-
-        It will then validate these inputs and calculate BMI.
         
-        Object of this class can provide a classification upon request.
-
-        When str is called, this class will return a csv compatible string for saving.
+        This class can return a classifcation when requested. str(object of this class) returns the stored BMI value.
 
     """
     def __init__(self, age, height, weight):
         self.age = age
         self.height = height
         self.weight = weight
-        self.value = (self.weight / (self.height * self.height)) * 703
+        self.bmi_value = round((self.weight / (self.height * self.height)) * 703)
     
-    def read_data(self, csv_value: str) -> None:
-        return super().read_data()
-    
-    def write_data(self) -> None:
-        return super().write_data()
+    def __str__(self):
+        return f"{self.bmi_value}"
+
+    def get_classification(self) -> str:
+        if self.bmi_value < 16:
+            return 'Severely Thin'
+        elif self.bmi_value >= 16 and self.bmi_value <= 17:
+            return 'Moderately Thin'
+        elif self.bmi_value > 17 and self.bmi_value <= 19:
+            return 'Mildly Thin'
+        elif self.bmi_value > 19 and self.bmi_value <= 25:
+            return 'Normal'
+        elif self.bmi_value > 25 and self.bmi_value <= 30:
+            return 'Overweight'
+        else:
+            return 'Obese'
+

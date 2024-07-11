@@ -8,6 +8,11 @@ class BGC_DataHandler(DataHandlerInterface):
     
     """
         This class is a wrapper class that holds a BGC value. It assumes that BGC was collected while fasting (hasn't eaten 2 hrs before).
+        
+        This class requires that BGC is passed to its constructor.
+
+        This class can return a classifcation when requested. str(object of this class) returns the stored BGC value.
+        
     """
     def __init__(self, value: int):
         self.bgc_value = value
