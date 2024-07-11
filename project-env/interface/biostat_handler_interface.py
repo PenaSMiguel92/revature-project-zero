@@ -36,3 +36,12 @@ class BiostatHandlerInterface(ABC):
             This method will raise the same exceptions as create_data for the same reasons.
         """
         pass
+
+    @abstractmethod
+    def show_data(self) -> None:
+        """
+            This method is will ask the user which data to plot, and plot the appropriate data. 
+            
+            This method will raise a data missing exception if the data list is empty.
+        """
+        pass

@@ -6,4 +6,4 @@ class InvalidBGCException(Exception):
         This will not use mmol/L -> out of scope for this project: a way to switch between units. mmol/L are presented with floats.
     """
     def __init__(self, message):
-        self.message = message
+        self.message = "(Invalid BGC Input) : " + message

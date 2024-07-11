@@ -1,7 +1,8 @@
-from custom_exceptions.menuselectioninvalid import MenuSelectionInvalid
+from custom_exceptions.menu_selection_invalid import MenuSelectionInvalidException
 from custom_exceptions.invalid_profile import InvalidProfileException
 from custom_exceptions.invalid_bgc import InvalidBGCException
 from custom_exceptions.invalid_bmi import InvalidBMIException
+from custom_exceptions.data_missing import DataMissingException
 from implementation.main_menu import MainMenu, menu_state
 
 def main() -> None:
@@ -14,16 +15,8 @@ def main() -> None:
     while menu_object.get_state() != menu_state.CLOSING_STATE:
         try:
             menu_object.run()
-        except MenuSelectionInvalid as MSI:
-            print(MSI.message)
-        except InvalidBMIException as IBMIE:
-            print(IBMIE.message)
-        except InvalidBGCException as IBGCE:
-            print(IBGCE.message)
-        except InvalidProfileException as IPE:
-            print(IPE.message)
-        # finally:
-        #     menu_object.set_state(menu_state.INITIAL_STATE)
+        except (MenuSelectionInvalidException, InvalidBMIException, InvalidBGCException, InvalidProfileException, DataMissingException) as e:
+            print(e.message)
 
 if __name__ == "__main__":
     main()

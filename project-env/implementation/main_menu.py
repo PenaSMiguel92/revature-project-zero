@@ -1,6 +1,7 @@
 from interface.input_validation import InputValidation
 from interface.menu_interface import MenuInterface
 from custom_exceptions.menu_selection_invalid import MenuSelectionInvalidException
+from custom_exceptions.data_missing import DataMissingException
 from implementation.profile_handler import ProfileHandler
 from implementation.biostat_handler import BiostatHandler
 from enum import Enum
@@ -87,17 +88,21 @@ class MainMenu(InputValidation, MenuInterface):
             
     
     def show_history(self):
-        print('Showing history...')
         self.reset_state()
+        if self.current_biostatHandler == None:
+            raise DataMissingException('Data is missing, please either report some data or load a profile.')
+        
+        self.current_biostatHandler.show_data()
 
     def report_biostats(self):
         self.reset_state()
         if self.current_biostatHandler != None:
-            self.current_biostatHandler.create_data()
-        else:
-            biostat_handler: BiostatHandler = BiostatHandler()
-            if biostat_handler.create_data():
-                self.current_biostatHandler = biostat_handler
+            self.current_biostatHandler.append_data()
+            return
+        
+        biostat_handler: BiostatHandler = BiostatHandler()
+        if biostat_handler.create_data():
+            self.current_biostatHandler = biostat_handler
         
 
     def run(self):

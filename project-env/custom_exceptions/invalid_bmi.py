@@ -5,4 +5,4 @@ class InvalidBMIException(Exception):
         Metric values are beyond the scope of this project for now. 
     """
     def __init__(self, message):
-        self.message = message
+        self.message = "(Invalid BMI Input) : " + message

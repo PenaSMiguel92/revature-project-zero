@@ -1,11 +1,16 @@
 import os.path as Path
 import csv
+import numpy as np
+import matplotlib.pyplot as plt
 from custom_exceptions.data_missing import DataMissingException
 from implementation.bgc_data_handler import BGC_DataHandler
 from implementation.bmi_data_handler import BMI_DataHandler
 from interface.biostat_handler_interface import BiostatHandlerInterface
 
 class BiostatHandler(BiostatHandlerInterface):
+    """
+        This class will handle loading data from the data file, creating and appending data to a data list, and plotting data from the data list.
+    """
     def __init__(self):
         self.data = []
 
@@ -40,4 +45,7 @@ class BiostatHandler(BiostatHandlerInterface):
 
     def append_data(self) -> None:
         
+        pass
+
+    def show_data(self) -> None:
         pass
