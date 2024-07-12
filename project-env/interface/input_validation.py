@@ -15,7 +15,7 @@ class InputValidation(ABC):
         """
         # try:
         if kwargs.get('char_input') != None:
-            return input_value in kwargs['valid_input']
+            return len(input_value) == 1 and input_value in kwargs['valid_input']
         elif kwargs.get('integer_input') != None:
             return input_value.isdigit()
         elif kwargs.get('string_input') != None:
