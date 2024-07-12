@@ -5,6 +5,7 @@ from matplotlib import pyplot as plt
 from custom_exceptions.data_missing import DataMissingException
 from custom_exceptions.invalid_bgc import InvalidBGCException
 from custom_exceptions.invalid_bmi import InvalidBMIException
+from custom_exceptions.invalid_history_selection import InvalidHistorySelectionException
 
 from implementation.bgc_data_handler import BGC_DataHandler
 from implementation.bmi_data_handler import BMI_DataHandler
@@ -44,14 +45,14 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
                 weight_value = int(row[1])
                 bgc_object = BGC_DataHandler(bgc_value)
                 bmi_object = BMI_DataHandler(self.age, self.height, weight_value)
-                self.data.append([bgc_object.get_value(), bmi_object.get_value()])
+                self.data.append([bgc_object, bmi_object])
 
         if len(self.data) < 1:
             print("This profile does not contain any data, please report them.")
         
         return True
     
-    def ask_for_data(self) -> list[int]:
+    def ask_for_data(self) -> list[BGC_DataHandler | BMI_DataHandler]:
         """
             Encapsulated method used internally to reduce repeating code.
         """
@@ -76,7 +77,7 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
         print(f"Your Blood Glucose Concentration is " + str(bgc_object) + " mg/dL which is considered " + bgc_object.get_classification())
         print(f"You Body Mass Index is " + str(bmi_object) + " which is makes you " + bmi_object.get_classification())
         print(f"Thank you! Your data has been saved.")
-        return [bgc_object.get_value(), bmi_object.get_value()]
+        return [bgc_object, bmi_object]
     
     
     def create_data(self) -> bool:
@@ -102,19 +103,32 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
         rows_to_write.append(['Height', 'Age'])
         rows_to_write.append([self.height, self.age])
         rows_to_write.append(['BGC', 'Weight'])
-        rows_to_write.extend(self.data)
+        data_to_write = [[item[0].get_value(), item[1].get_value()] for item in self.data]
+        rows_to_write.extend(data_to_write)
         with open(filename, 'w', newline='') as profile_data:
-            # csv_writer = csv.writer(profile_data)
-            # for idx, row in enumerate(csv_writer):
-
-            pass
+            csv_writer = csv.writer(profile_data)
+            csv_writer.writerows(rows_to_write)
+        
 
     def show_data(self) -> None:
-        x_axis = [len(self.data) - (x_value + 1) for x_value in range(len(self.data))]
-        y_axis = [int(str(value[0])) for value in self.data]
+        data_option = {'A':0, 'B':1}
+        titles = {'A':'Blood Glucose Concentration History', 'B':'Body Mass Index History'}
+        ylabels = {'A':'BGC (mg/dL)', 'B':'BMI'}
+
+        print("Which set of data would you like to display?")
+        print("(A) Blood Glucose Concentration History")
+        print("(B) Body Mass Index History")
+
+        user_input = input().upper()
+        if not self.validate_input(user_input, char_input = True, valid_input = 'AB'):
+            raise InvalidHistorySelectionException("Please enter a valid history option.")
         
-        plt.title("Blood Glucose Concentration")
+
+        x_axis = [x_value for x_value in range(len(self.data))]
+        y_axis = [value[data_option.get(user_input)].get_value() for value in self.data]
+        
+        plt.title(titles.get(user_input))
         plt.xlabel("Days Ago")
-        plt.ylabel("BGC (mg/dL)")
+        plt.ylabel(ylabels.get(user_input))
         plt.plot(x_axis, y_axis)
         plt.show()

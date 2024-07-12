@@ -45,12 +45,12 @@ class ProfileHandler(InputValidation, ProfileInterface):
         self.name = name_input
         self.height = height_input_int
         self.age = age_input_int
-
+        rows_to_write = []
+        rows_to_write.append(['Height', 'Age'])
+        rows_to_write.append([self.height, self.age])
+        
         with open(file_name, 'w+', newline='') as profile_data: 
-            csv_writer = csv.writer(profile_data)
-            rows_to_write = []
-            rows_to_write.append(['Height', 'Age'])
-            rows_to_write.append([self.height, self.age])
+            csv_writer = csv.writer(profile_data)    
             csv_writer.writerows(rows_to_write)
 
         print("Your profile was successfully created!")
