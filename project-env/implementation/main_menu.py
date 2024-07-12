@@ -99,7 +99,6 @@ class MainMenu(InputValidation, MenuInterface):
         biostat_handler: BiostatHandler = BiostatHandler()
         if biostat_handler.load_data(filename, const_biostats):
             self.current_biostatHandler = biostat_handler
-            print(self.current_biostatHandler)
 
     def show_history(self) -> None:
         self.reset_state()
@@ -110,7 +109,6 @@ class MainMenu(InputValidation, MenuInterface):
 
     def report_biostats(self) -> None:
         self.reset_state()
-        print(self.current_biostatHandler)
         if self.current_biostatHandler != None:
             self.current_biostatHandler.append_data()
             return

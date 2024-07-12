@@ -17,6 +17,6 @@ def main() -> None:
             menu_object.run()
         except (MenuSelectionInvalidException, InvalidBMIException, InvalidBGCException, InvalidProfileException, DataMissingException) as e:
             print(e.message)
-
+    print("Closing tracker. Have a nice day :)")
 if __name__ == "__main__":
     main()
