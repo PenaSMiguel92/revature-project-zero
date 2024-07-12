@@ -113,7 +113,7 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
     def show_data(self) -> None:
         data_option = {'A':0, 'B':1}
         titles = {'A':'Blood Glucose Concentration History', 'B':'Body Mass Index History'}
-        ylabels = {'A':'BGC (mg/dL)', 'B':'BMI'}
+        ylabels = {'A':'BGC (mg/dL)', 'B':'BMI (kg/m^2)'}
 
         print("Which set of data would you like to display?")
         print("(A) Blood Glucose Concentration History")
