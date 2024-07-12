@@ -91,6 +91,7 @@ class MainMenu(InputValidation, MenuInterface):
 
     def load_data(self) -> None:    
         if self.current_profile == None:
+            self.reset_state()
             raise InvalidProfileException("You haven't created or loaded a profile yet.")
         
         filename = self.current_profile.get_filename()
