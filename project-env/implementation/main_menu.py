@@ -71,19 +71,19 @@ class MainMenu(InputValidation, MenuInterface):
             case _:
                 self.current_state = menu_state.INITIAL_STATE
     
-    def create_profile(self):
+    def create_profile(self) -> None:
         self.reset_state()
         profile_handler: ProfileHandler = ProfileHandler()
         if profile_handler.create_profile():
             self.current_profile = profile_handler
             
-    def load_profile(self):
+    def load_profile(self) -> None:
         self.reset_state()
         profile_handler: ProfileHandler = ProfileHandler()
         if profile_handler.load_profile():
             self.current_profile = profile_handler
 
-    def load_data(self):    
+    def load_data(self) -> None:    
         if self.current_profile == None:
             raise InvalidProfileException("You haven't created or loaded a profile yet.")
         
@@ -95,14 +95,14 @@ class MainMenu(InputValidation, MenuInterface):
             self.current_biostatHandler = biostat_handler
             print(self.current_biostatHandler)
 
-    def show_history(self):
+    def show_history(self) -> None:
         self.reset_state()
         if self.current_biostatHandler == None:
             raise DataMissingException('Data is missing, please either report some data or load a profile.')
         
         self.current_biostatHandler.show_data()
 
-    def report_biostats(self):
+    def report_biostats(self) -> None:
         self.reset_state()
         print(self.current_biostatHandler)
         if self.current_biostatHandler != None:
@@ -114,7 +114,7 @@ class MainMenu(InputValidation, MenuInterface):
             self.current_biostatHandler = biostat_handler
         
 
-    def run(self):
+    def run(self) -> None:
         match self.current_state:
             case menu_state.INITIAL_STATE:
                 self.display_menu()

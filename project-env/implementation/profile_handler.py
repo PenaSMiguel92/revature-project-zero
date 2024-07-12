@@ -77,7 +77,7 @@ class ProfileHandler(InputValidation, ProfileInterface):
                 read_second_line = row
 
             if read_second_line == None:
-                raise InvalidProfileException('File is empty, please create a profile.')
+                raise InvalidProfileException('File is empty, please create another profile.')
             
             self.height = int(read_second_line[0])
             self.age = int(read_second_line[1])
@@ -93,5 +93,5 @@ class ProfileHandler(InputValidation, ProfileInterface):
         
         return f"data\\{self.name}_data.csv"
     
-    def get_const_biostats(self) -> tuple[int]:
-        return (self.height, self.age)
+    def get_const_biostats(self) -> list[int]:
+        return [self.height, self.age]

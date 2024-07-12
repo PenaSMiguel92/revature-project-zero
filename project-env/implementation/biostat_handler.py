@@ -23,7 +23,7 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
     #     self.height = const_biostats[0]
     #     self.age = const_biostats[1]
 
-    def load_data(self, filename: str, const_biostats: tuple[int]) -> bool:
+    def load_data(self, filename: str, const_biostats: list[int]) -> bool:
         if filename == '':
             raise DataMissingException("The filename was not valid.")
         
@@ -44,14 +44,14 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
                 weight_value = int(row[1])
                 bgc_object = BGC_DataHandler(bgc_value)
                 bmi_object = BMI_DataHandler(self.age, self.height, weight_value)
-                self.data.append((bgc_object, bmi_object))
+                self.data.append([bgc_object.get_value(), bmi_object.get_value()])
 
         if len(self.data) < 1:
             print("This profile does not contain any data, please report them.")
         
         return True
     
-    def ask_for_data(self) -> tuple[BGC_DataHandler | BMI_DataHandler]:
+    def ask_for_data(self) -> list[int]:
         """
             Encapsulated method used internally to reduce repeating code.
         """
@@ -76,7 +76,7 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
         print(f"Your Blood Glucose Concentration is " + str(bgc_object) + " mg/dL which is considered " + bgc_object.get_classification())
         print(f"You Body Mass Index is " + str(bmi_object) + " which is makes you " + bmi_object.get_classification())
         print(f"Thank you! Your data has been saved.")
-        return (bgc_object, bmi_object)
+        return [bgc_object.get_value(), bmi_object.get_value()]
     
     
     def create_data(self) -> bool:
@@ -98,6 +98,11 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
         if not Path.isfile(filename):
             raise DataMissingException("The provided filename does not exist.")
         
+        rows_to_write = []
+        rows_to_write.append(['Height', 'Age'])
+        rows_to_write.append([self.height, self.age])
+        rows_to_write.append(['BGC', 'Weight'])
+        rows_to_write.extend(self.data)
         with open(filename, 'w', newline='') as profile_data:
             # csv_writer = csv.writer(profile_data)
             # for idx, row in enumerate(csv_writer):

@@ -30,7 +30,7 @@ class MenuInterface(ABC):
         pass
 
     @abstractmethod
-    def create_profile(self):
+    def create_profile(self) -> None:
         """
             Method for creating a 'profile' which is just a file containing BGC and BMI data.
             
@@ -41,7 +41,7 @@ class MenuInterface(ABC):
         pass
     
     @abstractmethod
-    def load_profile(self):
+    def load_profile(self) -> None:
         """
             Load a profile from a file by asking the user for their name. It will then load profile details accordingly.
 
@@ -52,13 +52,13 @@ class MenuInterface(ABC):
         pass
 
     @abstractmethod
-    def load_data(self):
+    def load_data(self) -> None:
         """
             This method should only succeed if there's a profile currently loaded, and data exists in the file.
         """
         pass
     @abstractmethod
-    def show_history(self):
+    def show_history(self) -> None:
         """
             This method will use an existing profile handler object and load all rows of data saved so far. It will then plot the data with matplotlib.
 
@@ -69,7 +69,7 @@ class MenuInterface(ABC):
         pass
 
     @abstractmethod
-    def report_biostats(self):
+    def report_biostats(self) -> None: 
         """
             This method will use an existing profile handler object and ask it for the user's height before asking the user for their weight, and then creating a BMI object.
             It will then ask for the BGC and store it in a BGC object.
@@ -81,7 +81,7 @@ class MenuInterface(ABC):
         pass
 
     @abstractmethod
-    def run(self):
+    def run(self) -> None:
         """
             This method handles the main menu logic until the state becomes menu_state.CLOSING_STATE
             

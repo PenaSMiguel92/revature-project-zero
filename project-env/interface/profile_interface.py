@@ -30,7 +30,7 @@ class ProfileInterface(ABC):
         """
         pass
 
-    def get_const_biostats(self) -> tuple[int]:
+    def get_const_biostats(self) -> list[int]:
         """
             This method should return height and age in a tuple, which are constant across BMI measurements, hence constant biostats.
         """

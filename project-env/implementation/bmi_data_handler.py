@@ -20,17 +20,20 @@ class BMI_DataHandler(DataHandlerInterface):
 
         This class will require that Height: int (inches), Weight: int (pounds), and Age: Int (years) are passed to its constructor.
         
-        This class can return a classifcation when requested. str(object of this class) returns the stored BMI value.
+        This class can return a classifcation when requested. str(object of this class) returns the stored weight value.
 
     """
-    def __init__(self, age, height, weight):
+    def __init__(self, age: int, height: int, weight: int) -> None:
         self.age = age
         self.height = height
         self.weight = weight
         self.bmi_value = round((self.weight / (self.height * self.height)) * 703)
     
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.bmi_value}"
+
+    def get_value(self) -> int:
+        return self.weight
 
     def get_classification(self) -> str:
         if self.bmi_value < 16:

@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 class BiostatHandlerInterface(ABC):
     
     @abstractmethod
-    def load_data(self, filename: str, const_biostats: tuple[int]) -> bool: 
+    def load_data(self, filename: str, const_biostats: list[int]) -> bool: 
         """
             This method will be called by main_menu when loading a profile, so that data loading is handled by a different class (Single Responsibility principle)
             

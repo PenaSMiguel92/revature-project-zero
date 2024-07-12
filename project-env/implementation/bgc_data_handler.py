@@ -12,13 +12,16 @@ class BGC_DataHandler(DataHandlerInterface):
         This class requires that BGC is passed to its constructor.
 
         This class can return a classifcation when requested. str(object of this class) returns the stored BGC value.
-        
+
     """
     def __init__(self, value: int):
         self.bgc_value = value
 
     def __str__(self):
         return f"{self.bgc_value}"
+    
+    def get_value(self) -> int:
+        return self.bgc_value
     
     def get_classification(self) -> str:
         if self.bgc_value < 100:
