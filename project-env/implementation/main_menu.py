@@ -45,6 +45,10 @@ class MainMenu(InputValidation, MenuInterface):
         """
         self.current_state = menu_state.INITIAL_STATE
     
+    def reset_data(self) -> None:
+        self.current_profile = None
+        self.current_biostatHandler = None
+
     def display_menu(self) -> None:
         print('\nWelcome to your BGC and BMI Tracker!')
         print('What would you like to do?')
@@ -73,12 +77,14 @@ class MainMenu(InputValidation, MenuInterface):
     
     def create_profile(self) -> None:
         self.reset_state()
+        self.reset_data()
         profile_handler: ProfileHandler = ProfileHandler()
         if profile_handler.create_profile():
             self.current_profile = profile_handler
             
     def load_profile(self) -> None:
         self.reset_state()
+        self.reset_data()
         profile_handler: ProfileHandler = ProfileHandler()
         if profile_handler.load_profile():
             self.current_profile = profile_handler

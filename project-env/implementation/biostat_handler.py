@@ -125,10 +125,10 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
         
 
         x_axis = [x_value for x_value in range(len(self.data))]
-        y_axis = [item[data_option.get(user_input)].get_value() for item in self.data]
+        y_axis = [int(str(item[data_option.get(user_input)])) for item in self.data]
         
         plt.title(titles.get(user_input))
-        plt.xlabel("Days Ago")
+        plt.xlabel("Days Since Started Tracking")
         plt.ylabel(ylabels.get(user_input))
         plt.plot(x_axis, y_axis)
         plt.show()
