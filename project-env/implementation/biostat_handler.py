@@ -55,6 +55,8 @@ class BiostatHandler(InputValidation, BiostatHandlerInterface):
     def ask_for_data(self) -> list[BGC_DataHandler | BMI_DataHandler]:
         """
             Encapsulated method used internally to reduce repeating code.
+
+            Returns a list of either BGC_DataHandler or BMI_DataHandler wrapper objects. Through polymorphism, I can call a single method to get the stored value.
         """
         bgc_input = input("Please enter a BGC (mg/dL) value:")
         if not self.validate_input(bgc_input, integer_input = True):

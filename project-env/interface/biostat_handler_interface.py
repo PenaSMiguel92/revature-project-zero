@@ -45,14 +45,17 @@ class BiostatHandlerInterface(ABC):
     def save_data(self, filename: str) -> None:
         """
             This method will save the data list to the csv file, the filename should be passed in via the parameter filename.
+
+            It uses an object parameter to save data in the format: list[list[BGC_DataHandler | BMI_DataHandler]], iterates throught the list and calls get_value() on each object
+            to save that value to the csv file.
         """
         pass
 
     @abstractmethod
     def show_data(self) -> None:
         """
-            This method is will ask the user which data to plot, and plot the appropriate data. 
-
+            This method will ask the user which data to plot, and plot the appropriate data. 
+            
             This method will raise a data missing exception if the data list is empty.
         """
         pass

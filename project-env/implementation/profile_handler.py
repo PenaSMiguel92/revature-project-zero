@@ -10,14 +10,7 @@ class ProfileHandler(InputValidation, ProfileInterface):
         self.name = ''
         self.height = 0
         self.age = 0
-    # def __init__(self, name: str, height: int, age: int) -> None:
-    #     #For now, any other attributes will be beyond the scope of this project.
-    #     self.name = name
-    #     self.height = height
-    #     self.age = age
-
-    # def __str__(self):
-    #     return f"Name: {self.name}"
+        
     def create_profile(self) -> bool:
 
         name_input = input("Please enter your name: ")
