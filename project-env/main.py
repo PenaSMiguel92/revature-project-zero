@@ -1,4 +1,5 @@
 from custom_exceptions.menu_selection_invalid import MenuSelectionInvalidException
+from custom_exceptions.invalid_history_selection import InvalidHistorySelectionException
 from custom_exceptions.invalid_profile import InvalidProfileException
 from custom_exceptions.invalid_bgc import InvalidBGCException
 from custom_exceptions.invalid_bmi import InvalidBMIException
@@ -15,7 +16,7 @@ def main() -> None:
     while menu_object.get_state() != menu_state.CLOSING_STATE:
         try:
             menu_object.run()
-        except (MenuSelectionInvalidException, InvalidBMIException, InvalidBGCException, InvalidProfileException, DataMissingException) as e:
+        except (MenuSelectionInvalidException, InvalidBMIException, InvalidBGCException, InvalidProfileException, DataMissingException, InvalidHistorySelectionException) as e:
             print(e.message)
     print("Closing tracker. Have a nice day :)")
 if __name__ == "__main__":
