@@ -88,7 +88,7 @@ class MainMenu(InputValidation, MenuInterface):
             raise InvalidProfileException("You haven't created or loaded a profile yet.")
         
         filename = self.current_profile.get_filename()
-        const_biostats: tuple[int] = self.current_profile.get_const_biostats()
+        const_biostats: list[int] = self.current_profile.get_const_biostats()
 
         biostat_handler: BiostatHandler = BiostatHandler()
         if biostat_handler.load_data(filename, const_biostats):
